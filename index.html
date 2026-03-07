@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oke Gas Web - Agensi Web Modern</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class', 
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Satoshi', 'sans-serif'],
+                    },
+                    colors: {
+                        // Brand Colors Baru OkeGasWeb
+                        ybase: '#01164F',   // Navy Background
+                        oblue: '#2183FE', // Blue Accent (Font Utama)
+                        ycard: '#021e6a',   // Card Darker Navy
+                        ywhite: '#F9FEFE',  // Crystal White
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'marquee': 'marquee 25s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        marquee: {
+                            '0%': { transform: 'translateX(0)' },
+                            '100%': { transform: 'translateX(-100%)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* Cursor typing effect */
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 1s step-end infinite;
+            color: #2183FE;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
+        /* Override text color untuk readability di Navy background */
+        .text-og-white { color: #F9FEFE; }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-oblue selection:text-ybase transition-colors duration-300 bg-ybase text-ywhite">
+
+    <nav class="fixed w-full z-50 transition-colors duration-300 bg-ybase/90 backdrop-blur-md border-b border-oblue/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center gap-3">
+                    <a href="#" class="text-3xl font-black tracking-tighter text-ywhite">
+                        <img src="asset/Logo Agency 2.png" alt="Logo" class="h-16 w-auto">
+                    </a>
+                </div>
+
+                <div class="hidden md:flex items-center space-x-8">
+                    <div class="flex space-x-8">
+                        <a href="#about" class="text-sm font-bold hover:text-oblue transition">About Us</a>
+                        <a href="#portfolio" class="text-sm font-bold hover:text-oblue transition">Portofolio</a>
+                        <a href="#pricing" class="text-sm font-bold hover:text-oblue transition">Penawaran</a>
+                        <a href="#contact" class="text-sm font-bold hover:text-oblue transition">Kontak</a>
+                    </div>
+
+                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-white/10 transition">
+                        <svg id="sun-icon" class="w-6 h-6 text-oblue hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                        <svg id="moon-icon" class="w-6 h-6 text-oblue hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                    </button>
+                </div>
+
+                <div class="md:hidden flex items-center gap-4">
+                    <button id="mobile-menu-btn" class="text-ywhite focus:outline-none">
+                        <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="mobile-menu" class="hidden md:hidden bg-ycard border-t border-oblue/20 absolute w-full shadow-xl">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <a href="#about" class="block py-3 text-base font-bold border-b border-white/10">About Us</a>
+                <a href="#portfolio" class="block py-3 text-base font-bold border-b border-white/10">Portofolio</a>
+                <a href="#pricing" class="block py-3 text-base font-bold border-b border-white/10">Penawaran</a>
+                <a href="#contact" class="block py-3 text-base font-bold border-b border-white/10">Kontak</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="pt-32 pb-16 lg:pt-48 lg:pb-24 overflow-hidden relative">
+        <div class="absolute top-0 right-0 -z-10 w-96 h-96 bg-oblue/10 rounded-full blur-[100px] opacity-60"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                
+                <div class="text-center lg:text-left z-10">
+                    <div class="inline-block px-3 py-1 mb-4 bg-oblue text-ywhite text-xs font-black uppercase tracking-wider rounded">
+                        Open for Partnership
+                    </div>
+                    <h1 class="text-5xl lg:text-7xl font-black leading-tight mb-6">
+                        Oke Gas <br>
+                        <span id="typing-text" class="text-oblue typing-cursor"></span>
+                    </h1>
+                    <p class="text-lg text-ywhite/70 mb-8 max-w-md mx-auto lg:mx-0">
+                        Oke Gas Web adalah agensi terpercaya untuk membuat dan mengelola Web Dev modern. Jadilah <span class="font-bold text-oblue">Oke Gas Partner!</span>
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <a href="#about" class="inline-block bg-oblue text-ywhite px-8 py-4 rounded-full font-bold text-sm hover:bg-ywhite hover:text-ybase transition transform hover:-translate-y-1 shadow-[0_0_20px_rgba(33,131,254,0.4)]">
+                            Tak kenal maka kenalan
+                        </a>
+                        <a href="#portfolio" class="inline-block bg-transparent border-2 border-oblue text-oblue px-8 py-4 rounded-full font-bold text-sm hover:bg-oblue hover:text-ywhite transition">
+                            Lihat Karya
+                        </a>
+                    </div>
+                </div>
+
+                <div class="relative w-full h-64 lg:h-96 bg-ycard rounded-3xl overflow-hidden border-4 border-oblue/30 shadow-[8px_8px_0px_0px_#2183FE]"> 
+                    <div id="hero-carousel" class="absolute inset-0 flex transition-transform duration-700 ease-in-out">
+                        <div class="w-full flex-shrink-0 bg-ybase flex items-center justify-center h-full">
+                            <img src="photo_2026-03-07_18-01-31.jpg" class="w-full h-full object-cover opacity-60">
+                        </div>
+                        <div class="w-full flex-shrink-0 bg-ybase flex items-center justify-center h-full">
+                            <div class="w-3/4 h-3/4 bg-oblue/20 rounded-xl animate-float flex items-center justify-center text-ywhite font-bold text-xl">Feature Image 2</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="mt-20 relative overflow-hidden py-6 border-y-2 border-oblue/20 bg-oblue">
+                <div class="flex animate-marquee space-x-12 whitespace-nowrap items-center">
+                    <span class="text-2xl font-black text-ybase uppercase">LARAVEL</span>
+                    <span class="text-3xl font-black text-ywhite stroke-ybase uppercase" style="-webkit-text-stroke: 1px #01164F;">PHP</span>
+                    <span class="text-2xl font-black text-ybase uppercase">TAILWIND</span>
+                    <span class="text-2xl font-black text-ybase uppercase">MYSQL</span>
+                    <span class="text-2xl font-black text-ybase uppercase">FIGMA</span>
+                    <span class="text-2xl font-black text-ybase uppercase">LARAVEL</span>
+                    <span class="text-3xl font-black text-ywhite stroke-ybase uppercase" style="-webkit-text-stroke: 1px #01164F;">PHP</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="about" class="py-20 bg-ycard/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-black mb-4">Tentang Kami</h2>
+                <div class="w-24 h-2 bg-oblue mx-auto rounded-full"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 text-oblue">Tak Kenal Maka Kenalan</h3>
+                    <p class="text-ywhite/70 mb-6 leading-relaxed">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vel metus sed metus tempus egestas.
+                        Cras non justo imperdiet massa hendrerit lacinia. Vestibulum eu faucibus nibh.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="p-6 bg-ycard rounded-xl border-l-4 border-oblue shadow-sm">
+                            <h4 class="font-bold text-lg mb-1 text-ywhite">Misi Kami</h4>
+                            <p class="text-sm text-ywhite/60">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4 relative">
+                    <div class="absolute -top-4 -right-4 w-24 h-24 bg-oblue/20 -z-10 rounded-xl"></div>
+                    <div class="">
+                        <img class="rounded-2xl h-auto bg-oblue/10 rounded-2xl border-2 border-oblue/30 shadow-lg" src="asset/SV.png" alt="">
+                    </div>
+                    <div class="">
+                        <img class="h-auto bg-ybase rounded-2xl mt-8 border-2 border-oblue/30 shadow-lg flex items-center justify-center" src="asset/code.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-ybase">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-black text-center mb-16">Keunggulan <span class="text-oblue">Oke Gas Web</span></h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="p-8 border border-oblue/20 bg-ycard rounded-2xl hover:border-oblue transition duration-300 group">
+                    <div class="w-12 h-12 bg-oblue rounded-lg mb-6 flex items-center justify-center text-ywhite font-bold group-hover:rotate-12 transition">1</div>
+                    <h3 class="text-xl font-bold mb-2">Lorem Ipsum</h3>
+                    <p class="text-ywhite/60">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                </div>
+                <div class="p-8 border border-oblue/20 bg-ycard rounded-2xl hover:border-oblue transition duration-300 group">
+                    <div class="w-12 h-12 bg-oblue rounded-lg mb-6 flex items-center justify-center text-ywhite font-bold group-hover:rotate-12 transition">2</div>
+                    <h3 class="text-xl font-bold mb-2">Dolor Sit Amet</h3>
+                    <p class="text-ywhite/60">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                </div>
+                <div class="p-8 border border-oblue/20 bg-ycard rounded-2xl hover:border-oblue transition duration-300 group">
+                    <div class="w-12 h-12 bg-oblue rounded-lg mb-6 flex items-center justify-center text-ywhite font-bold group-hover:rotate-12 transition">3</div>
+                    <h3 class="text-xl font-bold mb-2">Consectetur</h3>
+                    <p class="text-ywhite/60">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="py-20 bg-ycard overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12">
+                <div>
+                    <h2 class="text-4xl font-black text-ywhite">Portofolio Kami</h2>
+                    <p class="text-ywhite/50 mt-2">Geser untuk melihat karya terbaik kami</p>
+                </div>
+                <div class="flex space-x-2 mt-4 md:mt-0">
+                    <button onclick="scrollPortfolio('left')" class="p-3 bg-ybase border border-oblue/20 rounded-full hover:bg-oblue transition text-ywhite">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                    </button>
+                    <button onclick="scrollPortfolio('right')" class="p-3 bg-ybase border border-oblue/20 rounded-full hover:bg-oblue transition text-ywhite">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </button>
+                </div>
+            </div>
+
+            <div id="portfolio-container" class="flex space-x-6 overflow-x-auto no-scrollbar scroll-smooth snap-x snap-mandatory py-4">
+                <div class="min-w-[85%] md:min-w-[45%] lg:min-w-[30%] snap-center group cursor-pointer">
+                    <div class="h-64 bg-ybase rounded-2xl mb-4 relative overflow-hidden shadow-lg border border-oblue/10 hover:border-oblue transition-colors duration-300">
+                         <div class="absolute top-4 right-4 bg-oblue text-ywhite text-xs font-bold px-3 py-1 rounded-full uppercase z-10">E-Commerce</div>
+                         <div class="absolute inset-0 flex items-center justify-center bg-oblue/5">IMG</div>
+                    </div>
+                    <h3 class="text-xl font-bold text-ywhite group-hover:text-oblue transition">Ratu Komputer</h3>
+                </div>
+                <div class="min-w-[85%] md:min-w-[45%] lg:min-w-[30%] snap-center group cursor-pointer">
+                    <div class="h-64 bg-ybase rounded-2xl mb-4 relative overflow-hidden shadow-lg border border-oblue/10 hover:border-oblue transition-colors duration-300">
+                         <div class="absolute top-4 right-4 bg-oblue text-ywhite text-xs font-bold px-3 py-1 rounded-full uppercase z-10">Landing Page</div>
+                         <div class="absolute inset-0 flex items-center justify-center bg-oblue/5">IMG</div>
+                    </div>
+                    <h3 class="text-xl font-bold text-ywhite group-hover:text-oblue transition">Oishi Tempe</h3>
+                </div>
+                <div class="min-w-[85%] md:min-w-[45%] lg:min-w-[30%] snap-center group cursor-pointer">
+                    <div class="h-64 bg-ybase rounded-2xl mb-4 relative overflow-hidden shadow-lg border border-oblue/10 hover:border-oblue transition-colors duration-300">
+                         <div class="absolute top-4 right-4 bg-oblue text-ywhite text-xs font-bold px-3 py-1 rounded-full uppercase z-10">Web App</div>
+                         <div class="absolute inset-0 flex items-center justify-center bg-oblue/5">IMG</div>
+                    </div>
+                    <h3 class="text-xl font-bold text-ywhite group-hover:text-oblue transition">MuDu Eco</h3>
+                </div>
+                <div class="min-w-[85%] md:min-w-[45%] lg:min-w-[30%] snap-center group cursor-pointer">
+                    <div class="h-64 bg-ybase rounded-2xl mb-4 relative overflow-hidden shadow-lg border border-oblue/10 hover:border-oblue transition-colors duration-300">
+                         <div class="absolute top-4 right-4 bg-oblue text-ywhite text-xs font-bold px-3 py-1 rounded-full uppercase z-10">Web App</div>
+                         <div class="absolute inset-0 flex items-center justify-center bg-oblue/5">IMG</div>
+                    </div>
+                    <h3 class="text-xl font-bold text-ywhite group-hover:text-oblue transition">MuDu Eco</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="py-20 bg-ybase">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-black text-center mb-16">Penawaran <span class="bg-oblue text-ywhite px-2 italic">OkeGas</span></h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-start">
+                
+                <div class="bg-ycard p-6 rounded-2xl flex flex-col h-full border-2 border-transparent hover:border-oblue transition duration-300">
+                    <div class="mb-4">
+                        <h3 class="text-2xl font-bold text-oblue">Zeta</h3>
+                        <p class="text-sm text-ywhite/50 mt-2">Mulai dari</p>
+                        <p class="text-3xl font-black">60k</p>
+                    </div>
+                    <p class="text-xs text-ywhite/60 mb-4 font-bold">Cocok untuk edukasi, profil pribadi, dan bisnis kecil</p>
+                    <ul class="space-y-2 mb-8 flex-grow text-xs leading-relaxed">
+                        <li><span class="text-oblue">✓</span> Website sekali jadi (No maintenance)</li>
+                        <li><span class="text-oblue">✓</span> Maks revisi 1x (Next +10k)</li>
+                        <li><span class="text-oblue">✓</span> Domain vercel/github</li>
+                        <li><span class="text-oblue">✓</span> Maksimal 1 Page</li>
+                        <li><span class="text-oblue">✓</span> 5 Hari Kerja (setelah DP)</li>
+                    </ul>
+                    <a target="_blank" href="https://wa.me/6285774690939?text=GASPOL!%20Halo%20OkeGasWeb%2C%20saya%20tertarik%20pesan%20paket%20ZETA%2060k.%20Mohon%20infonya." class="w-full block text-center bg-white/10 text-ywhite font-bold py-3 rounded-xl hover:bg-oblue transition">Pilih Zeta</a>
+                </div>
+
+                <div class="bg-oblue text-ywhite p-6 rounded-2xl flex flex-col h-full border-2 border-white relative transform lg:-translate-y-4 shadow-2xl">
+                    <div class="absolute top-0 right-0 bg-ybase text-oblue text-[10px] font-black px-2 py-1 rounded-bl-lg">POPULAR</div>
+                    <div class="mb-4">
+                        <h3 class="text-2xl font-bold">Beta</h3>
+                        <p class="text-sm text-white/70 mt-2">Mulai dari</p>
+                        <p class="text-3xl font-black">150k/thn</p>
+                    </div>
+                    <p class="text-xs text-white/80 mb-4 font-bold">Cocok untuk UMKM & Company Profile Profesional</p>
+                    <ul class="space-y-2 mb-8 flex-grow text-xs leading-relaxed">
+                        <li><span class="text-ybase">✓</span> Kontrak & Perawatan Tahunan</li>
+                        <li><span class="text-ybase">✓</span> Free Fix (Error/Down)</li>
+                        <li><span class="text-ybase">✓</span> Maks revisi 3x (Next +10k)</li>
+                        <li><span class="text-ybase">✓</span> Domain Pro (Masuk Google)</li>
+                        <li><span class="text-ybase">✓</span> Maks 3 Page (+30k/page)</li>
+                        <li><span class="text-ybase">✓</span> 5 Hari Kerja (setelah DP)</li>
+                    </ul>
+                    <a target="_blank" href="https://wa.me/6285774690939?text=GASPOL!%20Halo%20OkeGasWeb%2C%20saya%20tertarik%20pesan%20paket%20BETA%20150k.%20Mohon%20infonya." class="w-full block text-center bg-ybase text-oblue font-bold py-3 rounded-xl hover:bg-white transition">Pilih Beta</a>
+                </div>
+
+                <div class="bg-ycard p-6 rounded-2xl flex flex-col h-full border-2 border-transparent hover:border-oblue transition duration-300">
+                    <div class="mb-4">
+                        <h3 class="text-2xl font-bold text-oblue">Alpha</h3>
+                        <p class="text-sm text-ywhite/50 mt-2">Mulai dari</p>
+                        <p class="text-3xl font-black">470k/thn</p>
+                    </div>
+                    <p class="text-xs text-ywhite/60 mb-4 font-bold">Sistem Informasi & Alur Bisnis Kompleks</p>
+                    <ul class="space-y-2 mb-8 flex-grow text-xs leading-relaxed">
+                        <li><span class="text-oblue">✓</span> Website Dinamis (Halaman Admin)</li>
+                        <li><span class="text-oblue">✓</span> Free Maintenance Kontrak</li>
+                        <li><span class="text-oblue">✓</span> Maks revisi 3x (Next +10k)</li>
+                        <li><span class="text-oblue">✓</span> Domain Pro (Google Index)</li>
+                        <li><span class="text-oblue">✓</span> 3-5 Page (Konsultasi)</li>
+                        <li><span class="text-oblue">✓</span> Estimasi sesuai kesepakatan</li>
+                    </ul>
+                    <a target="_blank" href="https://wa.me/6285774690939?text=GASPOL!%20Halo%20OkeGasWeb%2C%20saya%20tertarik%20pesan%20paket%20ALPHA%20470k.%20Mohon%20infonya." class="w-full block text-center bg-white/10 text-ywhite font-bold py-3 rounded-xl hover:bg-oblue transition">Pilih Alpha</a>
+                </div>
+
+                 <div class="bg-ybase p-6 rounded-2xl flex flex-col h-full border-2 border-dashed border-oblue/30 hover:border-oblue transition">
+                    <div class="mb-4">
+                        <h3 class="text-2xl font-bold text-oblue">Artisan</h3>
+                        <p class="text-xl font-black">Custom</p>
+                    </div>
+                    <ul class="space-y-3 mb-8 flex-grow text-xs">
+                        <li><span class="text-oblue">✓</span> Spesifikasi Khusus</li>
+                        <li><span class="text-oblue">✓</span> Mobile Apps / Native</li>
+                    </ul>
+                    <a target="_blank" href="https://wa.me/6285774690939" class="w-full block text-center bg-oblue text-ywhite font-bold py-3 rounded-xl hover:scale-105 transition">Kontak Kami</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-oblue text-ybase">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-5xl font-black mb-6 leading-tight">Kenapa Bisnis <br> <span class="bg-ybase text-ywhite px-2">Perlu Website?</span></h2>
+                    <p class="font-medium text-lg">Data menunjukkan pentingnya kehadiran digital di era modern.</p>
+                </div>
+                <div class="bg-ybase p-8 rounded-3xl relative shadow-xl">
+                    <p class="text-8xl font-black text-oblue mb-4">84%</p>
+                    <p class="text-xl text-ywhite">Konsumen lebih percaya dengan bisnis yang punya website dibanding yang hanya mengandalkan media sosial.</p>
+                    <p class="mt-6 text-sm text-ywhite/40 font-mono">Sumber: Verisign, 2023</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-20 bg-ybase">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                
+                <div id="faq">
+                    <h2 class="text-3xl font-black mb-8 border-l-8 border-oblue pl-4">FAQ</h2>
+                    <div class="space-y-4">
+                        <div class="border-b border-gray-200 dark:border-gray-700 pb-4">
+                            <button class="flex justify-between items-center w-full text-left font-bold text-lg py-2 focus:outline-none hover:text-oblue transition" onclick="toggleFaq(this)">
+                                <span>Apa itu Oke Gas Web?</span>
+                                <span class="transform transition-transform text-2xl font-normal">+</span>
+                            </button>
+                            <div class="hidden mt-2 text-light leading-relaxed bg-gray-50 dark:bg-ycard p-4 rounded-lg">
+                                Oke Gas Web adalah agensi pengembangan web yang membantu bisnis membuat website profesional dan fungsional.
+                            </div>
+                        </div>
+                        <div class="border-b border-gray-200 dark:border-gray-700 pb-4">
+                            <button class="flex justify-between items-center w-full text-left font-bold text-lg py-2 focus:outline-none hover:text-oblue transition" onclick="toggleFaq(this)">
+                                <span>Bagaimana cara memesan?</span>
+                                <span class="transform transition-transform text-2xl font-normal">+</span>
+                            </button>
+                            <div class="hidden mt-2 text-light leading-relaxed bg-gray-50 dark:bg-ycard p-4 rounded-lg">
+                                Klik tombol biru cerah untuk hubungi kami via WhatsApp untuk konsultasi gratis.
+                            </div>
+                        </div>
+                                                <div class="border-b border-gray-200 dark:border-gray-700 pb-4">
+                            <button class="flex justify-between items-center w-full text-left font-bold text-lg py-2 focus:outline-none hover:text-oblue transition" onclick="toggleFaq(this)">
+                                <span>Bagaimana alur pemesanan?</span>
+                                <span class="transform transition-transform text-2xl font-normal">+</span>
+                            </button>
+                            <div class="hidden mt-2 text-light leading-relaxed bg-gray-50 dark:bg-ycard p-4 rounded-lg">
+                                
+                            <img src="asset/intruksi.png" alt="">
+                            Tidak ada pengembalian dana jika telah terjadi kesepakatan awal
+                            </div>
+                        </div>
+                        <div class="border-b border-gray-200 dark:border-gray-700 pb-4">
+                            <button class="flex justify-between items-center w-full text-left font-bold text-lg py-2 focus:outline-none hover:text-oblue transition" onclick="toggleFaq(this)">
+                                <span>Bagaimana proses pembayarannya?</span>
+                                <span class="transform transition-transform text-2xl font-normal">+</span>
+                            </button>
+                            <div class="hidden mt-2 text-light leading-relaxed bg-gray-50 dark:bg-ycard p-4 rounded-lg">
+                                Pembayaran bisa via transfer bank, bank digital, ataupun e-wallet, sesuai kesepakatan saat konsultasi. DP (down-payment) minimal 50% dari total harga, sisa pembayaran setelah website selesai, setelah lunas maka web akan bisa dapat diakses diinternet. <br> Untuk web pembayaran tahunan paling lambat membayar lunas pada H-7 tanggal website online dan jika tak dibayarkan maka website akan hilang secara otomatis.
+                            </div>
+                        </div>
+                        </div>
+                </div>
+
+                <div class="bg-ycard p-10 rounded-3xl text-center flex flex-col justify-center items-center relative overflow-hidden border border-oblue/20">
+                    <h2 class="text-3xl font-black mb-4">Masih Penasaran?</h2>
+                    <p class="text-ywhite/40 mb-8">Jangan sungkan kontak kami!</p>
+                    <a target="_blank" href="https://wa.me/6285774690939?text=GASPOL!%20Halo%20Dihar%2C%20saya%20mau%20tanya-tanya%20dong%20soal%20OkeGasWeb." class="bg-oblue text-ywhite w-full py-4 rounded-xl font-bold text-lg mb-4 hover:scale-105 transition flex items-center justify-center gap-2">
+                        <span>Chat WhatsApp Sekarang</span>
+                    </a>
+                    <a href="mailto:izzan4izdihar@gmail.com" class="text-ywhite/40 hover:text-oblue underline">izzan4izdihar@gmail.com</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-ybase border-t border-oblue/10 py-12 text-ywhite">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-4 md:mb-0 text-center md:text-left">
+                <img class="h-20 w-auto" src="asset/Logo Agency 1.png" alt="">
+                <p class="text-sm text-ywhite/30 mt-2">Membangun masa depan digital Anda.</p>
+            </div>
+            <div class="text-ywhite/30 text-sm">&copy; 2026 Oke Gas Web. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <script>
+        // Copy-paste dari script aslimu dengan sedikit penyesuaian warna
+        const html = document.documentElement;
+        html.classList.add('dark'); // Paksa dark mode navy
+
+        function toggleFaq(button) {
+            const answer = button.nextElementSibling;
+            answer.classList.toggle('hidden');
+        }
+
+        const words = ["Harga Mulai 60K!", "Dijamin Paling Murah!", "Digitalisasi Bisnis", "UMKM Digital", "Web 🔥"];
+        const typingText = document.getElementById('typing-text');
+        let wordIndex = 0; let charIndex = 0; let isDeleting = false; let typeSpeed = 100;
+
+        function type() {
+            const currentWord = words[wordIndex];
+            if (isDeleting) {
+                typingText.textContent = currentWord.substring(0, charIndex - 1);
+                charIndex--;
+                typeSpeed = 50;
+            } else {
+                typingText.textContent = currentWord.substring(0, charIndex + 1);
+                charIndex++;
+                typeSpeed = 150;
+            }
+
+            if (!isDeleting && charIndex === currentWord.length) {
+                typeSpeed = 2000; isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false; wordIndex++;
+                if (wordIndex === words.length) wordIndex = 0;
+            }
+            setTimeout(type, typeSpeed);
+        }
+        document.addEventListener('DOMContentLoaded', type);
+
+        const carousel = document.getElementById('hero-carousel');
+        let slideIndex = 0;
+        setInterval(() => {
+            slideIndex++;
+            if (slideIndex > 1) slideIndex = 0;
+            carousel.style.transform = `translateX(-${slideIndex * 100}%)`;
+        }, 4000);
+
+        function scrollPortfolio(direction) {
+            const container = document.getElementById('portfolio-container');
+            container.scrollBy({ left: direction === 'left' ? -300 : 300, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
